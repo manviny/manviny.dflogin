@@ -72,7 +72,8 @@ angular.module('manviny.dflogin', [
 .controller('LoginCtrl', [
 	'$scope', 'LoginHelper', '$location', '$rootScope',
 
-	function ($scope, LoginHelper, $location, $rootScope) {
+	function ($scope, LoginHelper, $rootScope) {
+		console.debug("entrando en la sesión")
 		$rootScope.isLoggedIn = false;
 		$scope.submit = function () {
 			LoginHelper.initiate({
@@ -80,14 +81,7 @@ angular.module('manviny.dflogin', [
 				password: $scope.password
 			}).then(function () {
 				$rootScope.isLoggedIn = true;
-				console.debug("has entrado la sesión")
-				// $location.path('/contacts');
 			});
-		};
-
-		$scope.register = function () {
-			alert("hi")
-			// $location.path('/register');
 		};
 	}
 ])
@@ -95,14 +89,13 @@ angular.module('manviny.dflogin', [
 .controller('LogoutCtrl', [ 
   '$scope', 'LoginHelper', '$location', '$rootScope',
 
-  function ($scope, LoginHelper, $location, $rootScope) {
+  function ($scope, LoginHelper, $rootScope) {
+  		console.debug("cerrando sesión");
     	$rootScope.isLoggedIn = true;
         $scope.logout = function () {
 			LoginHelper.logout({ })
 			.then(function () {
 				$rootScope.isLoggedIn = false;
-				console.debug("ha termiando la sesión");
-				// $location.path('/contacts');
 			});
         };
   }
@@ -112,7 +105,8 @@ angular.module('manviny.dflogin', [
 .controller('RegisterCtrl', [
 	'$scope', 'LoginHelper', '$location', '$rootScope',
 
-	function ($scope, LoginHelper, $location, $rootScope) {
+	function ($scope, LoginHelper, $rootScope) {
+		console.debug("registrandote")
 		$rootScope.isLoggedIn = false;
 		$scope.register = function () {
 			LoginHelper.register({
@@ -122,7 +116,6 @@ angular.module('manviny.dflogin', [
 				last_name: $scope.lastName || 'Anonimo'
 			}).then(function () {
 				console.debug("te has registrado")
-				// $location.path('/login');
 			});
 		};
 	}
