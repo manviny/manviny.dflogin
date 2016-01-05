@@ -86,6 +86,7 @@ angular.module('manviny.dflogin', [
 		};
 
 		$scope.register = function () {
+			alert("hi")
 			// $location.path('/register');
 		};
 	}
@@ -96,8 +97,6 @@ angular.module('manviny.dflogin', [
 
   function ($scope, LoginHelper, $location, $rootScope) {
     	$rootScope.isLoggedIn = true;
-    
-
         $scope.logout = function () {
 			LoginHelper.logout({ })
 			.then(function () {
