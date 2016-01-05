@@ -42,20 +42,6 @@ angular.module('manviny.dflogin', [
 			return deferred.promise;
 		};
 
-		this.logout = function (options) {
-			var deferred = $q.defer();
-			
-	          $http({
-	            method: 'DELETE',
-	            url: '/api/v2/user/session'
-	          }).success(function () {
-	            delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
-	            deferred.resolve();
-	          });
-
-			return deferred.promise;
-		};
-
 		this.register = function (options) {
 			var deferred = $q.defer();
 			
@@ -87,17 +73,20 @@ angular.module('manviny.dflogin', [
 ])
 
 .controller('LogoutCtrl', [ 
-  '$scope', 'LoginHelper', '$location', '$rootScope',
+  '$http', '$scope', 'LoginHelper', '$location', '$rootScope',
 
-  function ($scope, LoginHelper, $rootScope) {
+  function ($http, $scope, LoginHelper, $rootScope) {
   		console.debug("cerrando sesión");
     	$rootScope.isLoggedIn = true;
-        $scope.logout = function () {
-			LoginHelper.logout({ })
-			.then(function () {
-				$rootScope.isLoggedIn = false;
-			});
-        };
+      	$scope.logout = function () {
+      		$http({
+      			method: 'DELETE',
+      			url: '/api/v2/user/session'
+      		}).success(function () {
+      			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
+      			console.debug("sesión cerrada");
+      		});
+      	};
   }
 
 ])
