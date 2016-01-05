@@ -108,7 +108,7 @@ angular.module('manviny.dflogin', [
 
 ])
 
-.controller('RegisterController', [
+.controller('RegisterCtrl', [
 	'$scope', 'LoginHelper', '$location', '$rootScope',
 
 	function ($scope, LoginHelper, $location, $rootScope) {
