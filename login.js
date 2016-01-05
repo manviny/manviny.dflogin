@@ -73,7 +73,7 @@ angular.module('manviny.dflogin', [
 ])
 
 .controller('LogoutCtrl', [ 
-  '$http', '$scope', 'LoginHelper', '$location', '$rootScope',
+  '$http', '$scope', 'LoginHelper',  '$rootScope',
 
   function ($http, $scope, LoginHelper, $rootScope) {
   		console.debug("cerrando sesión");
