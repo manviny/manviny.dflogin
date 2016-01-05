@@ -92,9 +92,9 @@ angular.module('manviny.dflogin', [
 ])
 
 .controller('LogoutCtrl', [ 
-  '$scope', '$LoginHelper', '$location', '$rootScope',
+  '$scope', 'LoginHelper', '$location', '$rootScope',
 
-  function ($scope, $LoginHelper, $location, $rootScope) {
+  function ($scope, LoginHelper, $location, $rootScope) {
     	$rootScope.isLoggedIn = true;
     
 
