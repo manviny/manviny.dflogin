@@ -80,6 +80,7 @@ angular.module('manviny.dflogin', [
 				password: $scope.password
 			}).then(function () {
 				$rootScope.isLoggedIn = true;
+				console.debug("has entrado la sesión")
 				// $location.path('/contacts');
 			});
 		};
@@ -101,6 +102,7 @@ angular.module('manviny.dflogin', [
 			LoginHelper.logout({ })
 			.then(function () {
 				$rootScope.isLoggedIn = false;
+				console.debug("ha termiando la sesión");
 				// $location.path('/contacts');
 			});
         };
@@ -120,6 +122,7 @@ angular.module('manviny.dflogin', [
 				first_name: $scope.firstName || 'Anonimo',
 				last_name: $scope.lastName || 'Anonimo'
 			}).then(function () {
+				console.debug("te has registrado")
 				// $location.path('/login');
 			});
 		};
