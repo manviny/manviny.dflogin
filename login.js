@@ -1,8 +1,8 @@
 'use strict';
   /**
-   * @memberof manviny
-   * @ngdoc factory
-   * @name dfIO
+   * @memberof manviny.dreamfactory
+   * @ngdoc module
+   * @name dreamfactory
    * @param {service} $q promises
    * @description 
    *   Manage all related fucntions to chat
@@ -15,7 +15,12 @@
 	])
 
 
-	// App startdet
+    /**
+     * user global
+     * @memberof manviny
+     * @ngdoc run     
+     * @name log        
+     */
 	.run(function($log){
 	    $log.debug("App running")
 	})
@@ -23,7 +28,8 @@
     /**
      * user global
      * @memberof manviny
-     * @ngdoc run     
+     * @ngdoc run  
+     * @name rootScope           
      */
 	.run(['$rootScope', function ($rootScope) {
 			try {
@@ -35,6 +41,7 @@
     /**
      * @memberof manviny
      * @ngdoc factory     
+     * @name httpInterceptor       
      * @desc
      *  . **Creates** user  in DinamoDB  
      *  . saves user in phone  
@@ -56,7 +63,8 @@
     /**
      * httpProvider
      * @memberof manviny
-     * @ngdoc config     
+     * @ngdoc config   
+     * @name httpProvider  
      */
     .config([ '$httpProvider', function ($httpProvider) {
      	$httpProvider.interceptors.push('httpInterceptor');
@@ -66,7 +74,8 @@
     /**
      * '$http', 'DSP_API_KEY'
      * @memberof manviny
-     * @ngdoc run     
+     * @ngdoc run  
+     * @name DSP_API_KEY          
      */
 	.run(['$http', 'DSP_API_KEY',function ($http, DSP_API_KEY) {
 	   $http.defaults.headers.common['X-Dreamfactory-API-Key'] = DSP_API_KEY;
@@ -78,16 +87,18 @@
 	 * @ngdoc service
 	 * @name Login
 	 * @description
-	 *   allows login, regiter and logout
+	 *   allows login, register and logout
 	 */     
 	.service('Login', [ '$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
 
-		/**
-		 * set default header for every call
-		 * @memberof manviny
+	    /**
+	     * set default header for every call
+	     * @memberof Login
+	     * @function handleResult
+	 	 * @name handleResult	     
 		 * @param {result} 
 		 * @returns {data} data
-		 */	 	
+	     */		 	
 		var handleResult = function (result) {
 			$http.defaults.headers.common['X-DreamFactory-Session-Token'] = result.data.session_token;
 			$rootScope.user = result.data
@@ -95,8 +106,9 @@
 
 		/**
 		* login user
-		* @memberof manviny
-		* @param {creds} email, password
+		* @memberof Login
+	 	* @function login	 		
+		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
 		*/
 		this.login = function (creds) {
@@ -110,7 +122,8 @@
 
 		/**
 		* register new user
-		* @memberof manviny
+		* @memberof Login
+	 	* @function register	 			
 		* @param {creds} email, password
 		* @returns {Hash} filterd attributes
 		*/
