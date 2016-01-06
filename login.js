@@ -124,7 +124,7 @@
 		* register new user
 		* @memberof Login
 	 	* @function register	 			
-		* @param {creds} email, password
+		* @param {creds} email,password,first_name,last_name
 		* @returns {Hash} filterd attributes
 		*/
 		this.register = function () {
