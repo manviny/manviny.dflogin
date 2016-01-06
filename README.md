@@ -1,6 +1,6 @@
 # Install dreamfactory login/register
 
-1. **bower install** manviny/manviny/manviny.dreamfactory --save  
+1. **bower install** manviny/manviny.dreamfactory --save  
 2. check that all js and css libraries are loaded  
 3. **inject** 'manviny/manviny.dreamfactory' into your app module  
 4. **add** 'LoginCtrl','RegisterController' to your controller  
