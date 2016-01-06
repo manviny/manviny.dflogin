@@ -20,7 +20,11 @@
 	    $log.debug("App running")
 	})
 
-	// user data global
+    /**
+     * user global
+     * @memberof manviny
+     * @ngdoc run     
+     */
 	.run([
 		'$rootScope',
 		function ($rootScope) {
