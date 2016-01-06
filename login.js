@@ -8,7 +8,7 @@
    *   Manage all related fucntions to chat
    */ 
 
-	angular.module('manviny/manviny.dreamfactory', [
+	angular.module('manviny.dreamfactory', [
 		'ngRoute',
 		'ngResource',
 		'ngCookies'
