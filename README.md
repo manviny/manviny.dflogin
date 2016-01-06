@@ -1,8 +1,8 @@
 # Install dreamfactory login/register
 
-1. **bower install** manviny/manviny.dflogin --save  
+1. **bower install** manviny/manviny/manviny.dreamfactory --save  
 2. check that all js and css libraries are loaded  
-3. **inject** 'manviny.dflogin' into your app module  
+3. **inject** 'manviny/manviny.dreamfactory' into your app module  
 4. **add** 'LoginCtrl','RegisterController' to your controller  
 5. start using it  
 
@@ -11,7 +11,7 @@
 # Needed
 ```js
 # app.js
-angular.module('your-app', [..., 'manviny.dflogin', ...])
+angular.module('your-app', [..., 'manviny/manviny.dreamfactory', ...])
 .constant('INSTANCE_URL', 'http://sample-instance.cloud.dreamfactory.com')
 .constant('DSP_API_KEY', 'YOUR-API-KEY')
 
