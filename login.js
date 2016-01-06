@@ -18,7 +18,10 @@ angular.module('manviny.dflogin', [
 	}
 ])
 
-
+  .run(function($log){
+    $log.debug("App running")
+  })
+  
 .service('LoginHelper', [
 	'$http', '$q', '$cookies', '$rootScope',
 
@@ -109,3 +112,5 @@ angular.module('manviny.dflogin', [
 		};
 	}
 ])
+
+
