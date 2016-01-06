@@ -6,6 +6,15 @@
 4. **add** 'LoginCtrl','RegisterController' to your controller  
 5. start using it  
 
+
+
+# Needed
+```js
+angular.module('your-app', [])
+.constant('INSTANCE_URL', 'http://sample-instance.cloud.dreamfactory.com')
+.constant('DSP_API_KEY', 'YOUR-API-KEY')
+````
+
 ## use example 
 login.html
 ```html
