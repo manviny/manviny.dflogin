@@ -1,39 +1,54 @@
 'use strict';
+  /**
+   * @memberof manviny
+   * @ngdoc factory
+   * @name dfIO
+   * @param {service} $q promises
+   * @description 
+   *   Manage all related fucntions to chat
+   */ 
+
+	angular.module('manviny.dflogin', [
+		'ngRoute',
+		'ngResource',
+		'ngCookies'
+	])
 
 
-angular.module('manviny.dflogin', [
-	'ngRoute',
-	'ngResource',
-	'ngCookies'
-])
+	// App startdet
+	.run(function($log){
+	    $log.debug("App running")
+	})
 
+	// user data global
+	.run([
+		'$rootScope',
+		function ($rootScope) {
+			try {
+				$rootScope.user = JSON.parse(window.localStorage.user)
+			} catch (e) {}
+		}
+	])
 
-// App startdet
-.run(function($log){
-    $log.debug("App running")
-})
-
-// user data global
-.run([
-	'$rootScope',
-	function ($rootScope) {
-		try {
-			$rootScope.user = JSON.parse(window.localStorage.user)
-		} catch (e) {}
-	}
-])
-
-.factory('httpInterceptor', function (INSTANCE_URL) {
- return {
-  request: function (config) {
-   // Prepend instance url before every api call
-   if (config.url.indexOf('/api/v2') > -1) {
-   config.url = INSTANCE_URL + config.url;
-    };
-  return config;
-  }
-  }
-})
+    /**
+     * @memberof manviny
+     * @ngdoc factory     
+     * @desc
+     *  . **Creates** user  in DinamoDB  
+     *  . saves user in phone  
+     * @param {String} name debe ser un email
+     */
+	.factory('httpInterceptor', function (INSTANCE_URL) {
+	 return {
+	  request: function (config) {
+	   // Prepend instance url before every api call
+	   if (config.url.indexOf('/api/v2') > -1) {
+	   config.url = INSTANCE_URL + config.url;
+	    };
+	  return config;
+	  }
+	  }
+	})
 
 .config([
  '$httpProvider',
