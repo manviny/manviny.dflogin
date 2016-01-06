@@ -10,9 +10,19 @@
 
 # Needed
 ```js
-angular.module('your-app', [])
+# app.js
+angular.module('your-app', [..., 'manviny.dflogin', ...])
 .constant('INSTANCE_URL', 'http://sample-instance.cloud.dreamfactory.com')
 .constant('DSP_API_KEY', 'YOUR-API-KEY')
+
+...
+
+# mycontroller.js
+.controller('myCtrl', function ($scope, Login) {
+  	$scope.login = function(){
+  		alert($scope.email)
+  		Login.login({email:'usermail',password:'****'})
+
 ````
 
 ## use example 
