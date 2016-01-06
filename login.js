@@ -25,9 +25,7 @@
      * @memberof manviny
      * @ngdoc run     
      */
-	.run([
-		'$rootScope',
-		function ($rootScope) {
+	.run(['$rootScope', function ($rootScope) {
 			try {
 				$rootScope.user = JSON.parse(window.localStorage.user)
 			} catch (e) {}
@@ -44,13 +42,13 @@
      */
 	.factory('httpInterceptor', function (INSTANCE_URL) {
 	 return {
-	  request: function (config) {
-	   // Prepend instance url before every api call
-	   if (config.url.indexOf('/api/v2') > -1) {
-	   config.url = INSTANCE_URL + config.url;
-	    };
-	  return config;
-	  }
+		  request: function (config) {
+		   // Prepend instance url before every api call
+		   if (config.url.indexOf('/api/v2') > -1) {
+		       config.url = INSTANCE_URL + config.url;
+		   };
+		    return config;
+	    }
 	  }
 	})
 
@@ -62,6 +60,7 @@
      */
     .config([ '$httpProvider', function ($httpProvider) {
      	$httpProvider.interceptors.push('httpInterceptor');
+     }
     ])
 
     /**
