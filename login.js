@@ -18,10 +18,33 @@ angular.module('manviny.dflogin', [
 	}
 ])
 
-  .run(function($log){
+.run(function($log){
     $log.debug("App running")
-  })
-  
+})
+
+.run([
+	'$cookies', 'APP_API_KEY', '$http', '$rootScope', '$window',
+
+	function ($cookies, APP_API_KEY, $http, $rootScope, $window) {
+		$http.defaults.headers.common['X-Dreamfactory-API-Key'] = APP_API_KEY;
+		$http.defaults.headers.common['X-DreamFactory-Session-Token'] = $cookies.session_token;
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			$rootScope.isMobile = true;
+		}
+
+		angular.element($window).bind('scroll', function() {
+			var windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+			var body = document.body, html = document.documentElement;
+			var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+			var windowBottom = windowHeight + window.pageYOffset;
+			if (windowBottom >= docHeight) {
+				$rootScope.$broadcast('SCROLL_END');
+			}
+		});
+	}
+])
+
+
 .service('LoginHelper', [
 	'$http', '$q', '$cookies', '$rootScope',
 
@@ -68,8 +91,9 @@ angular.module('manviny.dflogin', [
 			LoginHelper.initiate({
 				email: $scope.username,
 				password: $scope.password
-			}).then(function () {
+			}).then(function (data) {
 				$rootScope.isLoggedIn = true;
+				console.debug("sesión", data)
 			});
 		};
 	}
