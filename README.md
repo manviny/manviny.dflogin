@@ -20,38 +20,17 @@ angular.module('your-app', [..., 'manviny.dreamfactory', ...])
 # mycontroller.js
 .controller('myCtrl', function ($scope, Login) {
   	$scope.login = function(){
-  		alert($scope.email)
   		Login.login({email:'usermail',password:'****'})
+  		.then(function(response){alert(JSON.stringify(response))})
 
 ````
 
 ## use example 
 login.html
 ```html
-<div class="signin-card">
+<div ng-controller="LoginCtrl">
+        <button ng-click="login()"> login </button>
 
-  <h1 class="text-center">Dreamfactory - Addressbook 2.0</h1>
-  <form ng-submit="submit()">
-    <md-input-container>
-      <label>Email</label>
-      <input type="email" ng-model="username">
-    </md-input-container>
-
-    <md-input-container>
-      <label>Password</label>
-      <input type="password" ng-model="password">
-    </md-input-container>
-
-    <div class="text-center">
-      <md-button type="submit" class="md-raised md-primary">Submit</md-button>
-    </div>
-
-    <div class="text-center">
-      <md-button type="button" class="md-primary" ng-click="register()">Register</md-button>
-    </div>
-
-  </form>
-</div>
 ```
 register.html
 ```html
