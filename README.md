@@ -11,7 +11,7 @@
 # Needed
 ```js
 # app.js
-angular.module('your-app', [..., 'manviny/manviny.dreamfactory', ...])
+angular.module('your-app', [..., 'manviny.dreamfactory', ...])
 .constant('INSTANCE_URL', 'http://sample-instance.cloud.dreamfactory.com')
 .constant('DSP_API_KEY', 'YOUR-API-KEY')
 
