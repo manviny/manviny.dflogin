@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Manviny.dreamfactory : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Manviny.dreamfactory</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/manviny/manviny.dreamfactory">View on GitHub</a>
+
+          <h1 id="project_title">Manviny.dreamfactory</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/manviny/manviny.dreamfactory/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/manviny/manviny.dreamfactory/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="install-dreamfactory-loginregister" class="anchor" href="#install-dreamfactory-loginregister" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install dreamfactory login/register</h1>
+
+<ol>
+<li>
+<strong>bower install</strong> manviny/manviny.dreamfactory --save<br>
+</li>
+<li>check that all js and css libraries are loaded<br>
+</li>
+<li>
+<strong>inject</strong> 'manviny/manviny.dreamfactory' into your app module<br>
+</li>
+<li>
+<strong>add</strong> 'LoginCtrl','RegisterController' to your controller<br>
+</li>
+<li>start using it<br>
+</li>
+</ol>
+
+<h1>
+<a id="needed" class="anchor" href="#needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Needed</h1>
+
+<div class="highlight highlight-source-js"><pre># <span class="pl-smi">app</span>.<span class="pl-smi">js</span>
+<span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>your-app<span class="pl-pds">'</span></span>, [..., <span class="pl-s"><span class="pl-pds">'</span>manviny.dreamfactory<span class="pl-pds">'</span></span>, ...])
+.<span class="pl-en">constant</span>(<span class="pl-s"><span class="pl-pds">'</span>INSTANCE_URL<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>http://sample-instance.cloud.dreamfactory.com<span class="pl-pds">'</span></span>)
+.<span class="pl-en">constant</span>(<span class="pl-s"><span class="pl-pds">'</span>DSP_API_KEY<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>YOUR-API-KEY<span class="pl-pds">'</span></span>)
+
+...
+
+# <span class="pl-smi">mycontroller</span>.<span class="pl-smi">js</span>
+.<span class="pl-en">controller</span>(<span class="pl-s"><span class="pl-pds">'</span>myCtrl<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">$scope</span>, <span class="pl-smi">Login</span>) {
+    <span class="pl-c1">$scope</span>.<span class="pl-en">login</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(){
+        <span class="pl-smi">Login</span>.<span class="pl-en">login</span>({email<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>usermail<span class="pl-pds">'</span></span>,password<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>****<span class="pl-pds">'</span></span>})
+        .<span class="pl-en">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">response</span>){<span class="pl-c1">alert</span>(<span class="pl-smi">JSON</span>.<span class="pl-en">stringify</span>(response))})
+</pre></div>
+
+<h2>
+<a id="use-example" class="anchor" href="#use-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>use example</h2>
+
+<p>login.html</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">ng-controller</span>=<span class="pl-s"><span class="pl-pds">"</span>LoginCtrl<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">ng-click</span>=<span class="pl-s"><span class="pl-pds">"</span>login()<span class="pl-pds">"</span></span>&gt; login &lt;/<span class="pl-ent">button</span>&gt;
+</pre></div>
+
+<p>register.html</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>signin-card<span class="pl-pds">"</span></span>&gt;
+
+  &lt;<span class="pl-ent">h1</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>text-center<span class="pl-pds">"</span></span>&gt;Register&lt;/<span class="pl-ent">h1</span>&gt;
+  &lt;<span class="pl-ent">form</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>registerForm<span class="pl-pds">"</span></span> <span class="pl-e">ng-submit</span>=<span class="pl-s"><span class="pl-pds">"</span>submit()<span class="pl-pds">"</span></span>&gt;
+
+    &lt;<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+      &lt;<span class="pl-ent">label</span>&gt;First name&lt;/<span class="pl-ent">label</span>&gt;
+      &lt;<span class="pl-ent">input</span> <span class="pl-e">ng-model</span>=<span class="pl-s"><span class="pl-pds">"</span>firstName<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+
+    &lt;<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+      &lt;<span class="pl-ent">label</span>&gt;Last name&lt;/<span class="pl-ent">label</span>&gt;
+      &lt;<span class="pl-ent">input</span> <span class="pl-e">ng-model</span>=<span class="pl-s"><span class="pl-pds">"</span>lastName<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+
+    &lt;<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+      &lt;<span class="pl-ent">label</span>&gt;Email&lt;/<span class="pl-ent">label</span>&gt;
+      &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span> <span class="pl-e">ng-model</span>=<span class="pl-s"><span class="pl-pds">"</span>username<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+
+    &lt;<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+      &lt;<span class="pl-ent">label</span>&gt;Password&lt;/<span class="pl-ent">label</span>&gt;
+      &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span> <span class="pl-e">ng-model</span>=<span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">md</span><span class="pl-e">-input-container</span>&gt;
+
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>text-center<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">md</span><span class="pl-e">-button</span> <span class="pl-e">ng-disabled</span>=<span class="pl-s"><span class="pl-pds">"</span>registerForm.$invalid<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>md-primary<span class="pl-pds">"</span></span> <span class="pl-e">ng-click</span>=<span class="pl-s"><span class="pl-pds">"</span>register()<span class="pl-pds">"</span></span>&gt;Register&lt;/<span class="pl-ent">md</span><span class="pl-e">-button</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+
+  &lt;/<span class="pl-ent">form</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Manviny.dreamfactory maintained by <a href="https://github.com/manviny">manviny</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
