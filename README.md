@@ -18,9 +18,9 @@ angular.module('your-app', [..., 'manviny.dreamfactory', ...])
 ...
 
 # mycontroller.js
-.controller('myCtrl', function ($scope, Login) {
+.controller('myCtrl', function ($scope, DFUser) {
   	$scope.login = function(){
-  		Login.login({email:'usermail',password:'****'})
+  		DFUser.login({email:'usermail',password:'****'})
   		.then(function(response){alert(JSON.stringify(response))})
 
 ````

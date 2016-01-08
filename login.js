@@ -85,7 +85,7 @@
 	 * @description
 	 *   allows login, register and logout
 	 */     
-	.service('Login', [ '$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+	.service('DFUser', [ '$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
 
 	    /**
 	     * set default header for every call
