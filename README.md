@@ -18,18 +18,40 @@ angular.module('your-app', [..., 'manviny.dreamfactory', ...])
 ...
 
 # mycontroller.js
-.controller('myCtrl', function ($scope, DFUser) {
-  	$scope.login = function(){
-  		DFUser.login({email:'usermail',password:'****'})
-  		.then(function(response){alert(JSON.stringify(response))})
+  .controller('LoginCtrl', function ($scope, DFUser) {
+    $scope.login = function(){
+        DFUser.login({email: $scope.username, password:$scope.password})
+        .then(function(response){alert(JSON.stringify(response))})
+    }
+  });
 
 ````
 
 ## use example 
 login.html
 ```html
-<div ng-controller="LoginCtrl">
-        <button ng-click="login()"> login </button>
+<div class="signin-card" ng-controller="LoginCtrl">
+
+  <h1 class="text-center">Gestor Documental</h1>
+  <form >
+    <md-input-container>
+      <label>Email</label>
+      <input type="email" ng-model="username">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Contraseña</label>
+      <input type="password" ng-model="password">
+    </md-input-container>
+
+  <div layout="row">
+      <md-button type="submit" flex class="md-raised md-primary" ng-click="login()">Submit</md-button>
+      <md-button type="button" flex class="md-primary" ng-click="register()">Register</md-button>
+  </div>
+
+  </form>
+  
+</div>
 
 ```
 register.html

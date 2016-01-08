@@ -115,6 +115,24 @@
 			}, deferred.reject);
 			return deferred.promise;
 		};
+		/**
+		* logout user
+		* @memberof logout
+	 	* @function logout	 		
+		* @param {creds} email,password
+		* @returns {Hash} filterd attributes
+		*/
+		this.logout = function (creds) {
+			var deferred = $q.defer();
+      		$http({
+      			method: 'DELETE',
+      			url: '/api/v2/user/session'
+      		}).success(function (result) {
+      			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
+      			deferred.resolve(result);
+      		});
+			return deferred.promise;
+		};
 
 		/**
 		* register new user
