@@ -187,11 +187,11 @@
 
 
 		/**
-		* login user
+		* Get files and folders from bucket
 		* @memberof DFS3
 	 	* @function getBucket	 		
-		* @param {creds} email,password
-		* @returns {Hash} filterd attributes
+		* @param {bucketPath} bucketPath
+		* @returns {array} array of Objects
 		*/
 		this.getBucket = function (path) {
 			var deferred = $q.defer();
