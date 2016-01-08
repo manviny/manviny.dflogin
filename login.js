@@ -193,15 +193,9 @@
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
 		*/
-		this.getBucket = function (creds) {
+		this.getBucket = function (path) {
 			var deferred = $q.defer();
-			$http.post('/api/v2/S3',{
-		     	container: '/',
-		     	include_folders: true,
-		     	include_properties: true,
-		     	full_tree: true,
-		     	folder_path: '/'
-	     }).then(function (result) {
+			$http.get('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/?include_folders=true&include_files=true').then(function (result) {
 				//  handleResult(result);
 				 deferred.resolve(result.data);
 			}, deferred.reject);
