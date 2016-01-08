@@ -151,6 +151,8 @@
 		}
 
 	}])
+
+
 	/**
      * @memberof manviny	
 	 * @ngdoc service
@@ -171,7 +173,7 @@
 		this.getBucket = function (creds) {
 			var deferred = $q.defer();
 			$http.post('api/v2/S3').then(function (result) {
-				 handleResult(result);
+				//  handleResult(result);
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
