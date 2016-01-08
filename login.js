@@ -150,6 +150,29 @@
 			return deferred.promise;
 		}
 
+		/**
+		* register new user
+		* @memberof Login
+	 	* @function getRole	 			
+		* @param {creds} email,password,first_name,last_name
+		* @returns {Hash} filterd attributes
+		*/
+		this.getRole = function (roleID) {
+			var deferred = $q.defer();
+			$http({
+			  method: 'POST',
+			  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			  url: 'http://dreamfactory.jrc-sistemas-naturales.bitnamiapp.com/rest/system/script/userrole/',
+			  data: $.param({ is_user_script:true, id:roleID }), // Make sure to inject the service
+			})
+			.success(function(response) { 
+				console.debug("role data",response.script_result); 
+				deferred.resolve(response.script_result)
+			});
+			return deferred.promise;
+		}
+
+
 	}])
 
 
@@ -172,7 +195,13 @@
 		*/
 		this.getBucket = function (creds) {
 			var deferred = $q.defer();
-			$http.post('api/v2/S3').then(function (result) {
+			$http.post('/api/v2/S3',{
+		     	container: '/',
+		     	include_folders: true,
+		     	include_properties: true,
+		     	full_tree: true,
+		     	folder_path: '/'
+	     }).then(function (result) {
 				//  handleResult(result);
 				 deferred.resolve(result.data);
 			}, deferred.reject);
