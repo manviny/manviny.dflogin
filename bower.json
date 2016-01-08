@@ -4,7 +4,7 @@
     "manol <manol@indinet.es>"
   ],
   "description": "logear y registrarse en dreamfactory",
-  "main": ["login.js","login.css"],
+  "main": ["dreamfactory.js"],
   "moduleType": [],
   "license": "MIT",
   "homepage": "",

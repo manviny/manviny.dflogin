@@ -81,7 +81,7 @@
 	/**
      * @memberof manviny	
 	 * @ngdoc service
-	 * @name Login
+	 * @name DFUser
 	 * @description
 	 *   allows login, register and logout
 	 */     
@@ -89,7 +89,7 @@
 
 	    /**
 	     * set default header for every call
-	     * @memberof Login
+	     * @memberof DFUser
 	     * @function handleResult
 	 	 * @name handleResult	     
 		 * @param {result} 
@@ -102,7 +102,7 @@
 
 		/**
 		* login user
-		* @memberof Login
+		* @memberof DFUser
 	 	* @function login	 		
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
@@ -117,7 +117,7 @@
 		};
 		/**
 		* logout user
-		* @memberof logout
+		* @memberof DFUser
 	 	* @function logout	 		
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
@@ -136,7 +136,7 @@
 
 		/**
 		* register new user
-		* @memberof Login
+		* @memberof DFUser
 	 	* @function register	 			
 		* @param {creds} email,password,first_name,last_name
 		* @returns {Hash} filterd attributes
@@ -152,7 +152,7 @@
 
 		/**
 		* register new user
-		* @memberof Login
+		* @memberof DFUser
 	 	* @function getRole	 			
 		* @param {creds} email,password,first_name,last_name
 		* @returns {Hash} filterd attributes
@@ -181,14 +181,14 @@
 	 * @ngdoc service
 	 * @name DFS3
 	 * @description
-	 *   allows login, register and logout
+	 *   Services to use S3
 	 */     
 	.service('DFS3', [ '$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
 
 
 		/**
 		* login user
-		* @memberof Login
+		* @memberof DFS3
 	 	* @function getBucket	 		
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
