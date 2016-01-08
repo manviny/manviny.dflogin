@@ -151,5 +151,33 @@
 		}
 
 	}])
+	/**
+     * @memberof manviny	
+	 * @ngdoc service
+	 * @name DFS3
+	 * @description
+	 *   allows login, register and logout
+	 */     
+	.service('DFS3', [ '$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+
+
+		/**
+		* login user
+		* @memberof Login
+	 	* @function getBucket	 		
+		* @param {creds} email,password
+		* @returns {Hash} filterd attributes
+		*/
+		this.getBucket = function (creds) {
+			var deferred = $q.defer();
+			$http.post('api/v2/S3').then(function (result) {
+				 handleResult(result);
+				 deferred.resolve(result.data);
+			}, deferred.reject);
+			return deferred.promise;
+		};
+
+
+	}])
 
 
