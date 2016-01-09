@@ -187,7 +187,7 @@
 
 
 		/**
-		* Get bucket
+		* Get bucket files and folders
 		* @memberof DFS3
 	 	* @function getBucket	 		
 		* @param {creds} email,password
