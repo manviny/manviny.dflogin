@@ -217,6 +217,22 @@
 			return deferred.promise;
 		};
 
+		/**
+		* get path
+		* @memberof DFS3
+	 	* @function getPath	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.getPaths = function (path, name) {
+			var deferred = $q.defer();
+
+			$http.get('/api/v2/S3?as_list=true&as_access_list=true').then(function (result) {
+				deferred.resolve(result.data.resource);
+			}, deferred.reject);
+			return deferred.promise;
+		};
+
 
 	}])
 
