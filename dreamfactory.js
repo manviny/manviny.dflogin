@@ -187,16 +187,31 @@
 
 
 		/**
-		* Get files and folders from bucket
+		* Get bucket
 		* @memberof DFS3
 	 	* @function getBucket	 		
-		* @param {bucketPath} bucketPath
-		* @returns {array} array of Objects
+		* @param {creds} email,password
+		* @returns {Hash} filterd attributes
 		*/
 		this.getBucket = function (path) {
 			var deferred = $q.defer();
 			$http.get('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/?include_folders=true&include_files=true').then(function (result) {
 				//  handleResult(result);
+				 deferred.resolve(result.data);
+			}, deferred.reject);
+			return deferred.promise;
+		};
+
+		/**
+		* creates file in S3
+		* @memberof DFS3
+	 	* @function getBucket	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.createFile = function (path, name) {
+			var deferred = $q.defer();
+			$http.post('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
