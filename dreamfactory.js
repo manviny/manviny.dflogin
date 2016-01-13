@@ -187,17 +187,53 @@
 
 
 		/**
-		* Get bucket files and folders
+		* Get bucket files and folders from the given path (1 level, not recursive)
 		* @memberof DFS3
-	 	* @function getBucket	 		
-		* @param {creds} email,password
-		* @returns {Hash} filterd attributes
+	 	* @function getBucketContent	 		
+		* @param {path}  path from where to get content
+		* @returns {array} array of Objects => {files:files, folders:folders} -> (content_length, content_type, last_modified, name, path, type)
+	    * @example
+	    *   Usage:
+	    *   		DFS3.getBucketContent( || '' || '/' || 'path'|| '/path'|| 'path/' || '/path/')
+		*			.then(function (result) { 		
 		*/
-		this.getBucket = function (path) {
+		this.getBucketContent = function (path) {
+			var files = []; var folders = [];
+			if(path==undefined) path = '';
+
 			var deferred = $q.defer();
 			$http.get('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/?include_folders=true&include_files=true').then(function (result) {
-				//  handleResult(result);
-				 deferred.resolve(result.data);
+				angular.forEach(result.data.resource, function(value) {
+					if(value.type=='folder'){ folders.push(value) }
+					else { files.push(value) }
+				});
+				deferred.resolve({files:files, folders:folders});
+			}, deferred.reject);
+			return deferred.promise;
+		};
+
+		/**
+		* get paths from the given path (all levels under this path)
+		* @memberof DFS3
+	 	* @function getPaths	 		
+		* @param {path} root path from where to get paths
+		* @returns {Array} array o Strings with paths
+	    * @example
+	    *   Usage:
+	    *   		DFS3.getPaths( || '' || '/' || 'path'|| '/path'|| 'path/' || '/path/')
+		*			.then(function (result) { 		
+		*/
+		this.getPathsRecursive = function (path) {
+			if(path==undefined) path = '';
+			var paths = [];
+			var deferred = $q.defer();
+
+			// quita primer y ultimo '/'
+			$http.get('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/?as_list=true&as_access_list=true').then(function (result) {
+				angular.forEach(result.data.resource, function(value) {
+					if(value.slice(-1)!='*') paths.push(value.slice(0, -1));				// quita rutas que terminan en *
+				});
+				deferred.resolve(paths);
 			}, deferred.reject);
 			return deferred.promise;
 		};
@@ -217,21 +253,6 @@
 			return deferred.promise;
 		};
 
-		/**
-		* get path
-		* @memberof DFS3
-	 	* @function getPath	 		
-		* @param {path,name} path in S3, name of the file
-		* @returns {Hash} filterd attributes
-		*/
-		this.getPaths = function (path, name) {
-			var deferred = $q.defer();
-
-			$http.get('/api/v2/S3?as_list=true&as_access_list=true').then(function (result) {
-				deferred.resolve(result.data.resource);
-			}, deferred.reject);
-			return deferred.promise;
-		};
 
 
 	}])
