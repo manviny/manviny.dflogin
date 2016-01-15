@@ -79,6 +79,34 @@
 
 
 	/**
+	* UPLOAD FILES
+	* @memberof DFS3
+    * @ngdoc directive   		
+	* @param {path}  path from where to get content
+	* @returns {array} array of Objects => {files:files, folders:folders} -> (content_length, content_type, last_modified, name, path, type)
+    * @example
+    *   Usage:
+    *   		<input type="file" file-model="myFile" />
+	*			<button ng-click="uploadFile()">upload me</button>		
+	*/	
+	.directive('fileModel', ['$parse', function ($parse) {
+	    return {
+	        restrict: 'A',
+	        link: function(scope, element, attrs) {
+	            var model = $parse(attrs.fileModel);
+	            var modelSetter = model.assign;
+	            
+	            element.bind('change', function(){
+	                scope.$apply(function(){
+	                    modelSetter(scope, element[0].files[0]);
+	                });
+	            });
+	        }
+	    };
+	}])
+    
+    
+	/**
      * @memberof manviny	
 	 * @ngdoc service
 	 * @name DFUser
@@ -239,9 +267,9 @@
 		};
 
 		/**
-		* creates file in S3
+		* creates EMPTY file in S3
 		* @memberof DFS3
-	 	* @function getBucket	 		
+	 	* @function createFile	 		
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
@@ -251,6 +279,35 @@
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
+		};
+
+
+		/**
+		* Uploads a file to S3
+		* @memberof DFS3
+	 	* @function uploadFile	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.uploadFile = function (file) {
+			var deferred = $q.defer();
+
+		    var fd = new FormData();
+		    fd.append("files", file);
+
+		    $http.post( "/api/v2/S3"  + '/' + file.name, fd, {	
+		        headers: {'Content-Type': undefined },
+		        transformRequest: angular.identity
+		    })  
+		    .success(function(data){
+		    	deferred.resolve(data);
+			})
+			.error(function(data){
+		    	deferred.reject(data);
+			});	
+
+			return deferred.promise;
+
 		};
 
 
