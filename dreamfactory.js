@@ -282,6 +282,22 @@
 			return deferred.promise;
 		};
 
+
+		/**
+		* deletes  file in S3
+		* @memberof DFS3
+	 	* @function deleteFile	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.deleteFile = function (path, name) {
+			var deferred = $q.defer();
+			$http.delete('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+				 deferred.resolve(result.data);
+			}, deferred.reject);
+			return deferred.promise;
+		};
+
 		/**
 		* creates FOLDER file in S3
 		* @memberof DFS3ΩΩΩ
