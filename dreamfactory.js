@@ -282,6 +282,20 @@
 			return deferred.promise;
 		};
 
+		/**
+		* creates FOLDER file in S3
+		* @memberof DFS3ΩΩΩ
+	 	* @function createFolder	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.createFolder = function (path, name) {
+			var deferred = $q.defer();
+			$http.post('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+				 deferred.resolve(result.data);
+			}, deferred.reject);
+			return deferred.promise;
+		};
 
 		/**
 		* Uploads a file to S3
