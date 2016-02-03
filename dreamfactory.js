@@ -321,8 +321,16 @@
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.pathToBreadcrumbs = function (name) {
-
+		this.pathToBreadcrumbs = function (bucketContent) {
+			
+				// breadcrumbs
+				try { 
+					var breadcrumbs = bucketContent.folders[0].path.split('/');
+					breadcrumbs.pop(); breadcrumbs.pop();
+				} catch(err) { 
+					return bucketContent.folders;
+				}
+				return breadcrumbs
 		};
 
 		/**
@@ -343,13 +351,13 @@
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.uploadFile = function (file) {
+		this.uploadFile = function (path, file) {
 			var deferred = $q.defer();
 
 		    var fd = new FormData();
 		    fd.append("files", file);
 
-		    $http.post( "/api/v2/S3"  + '/' + file.name, fd, {	
+		    $http.post( "/api/v2/S3/"+ path  + '/' + file.name, fd, {	
 		        headers: {'Content-Type': undefined },
 		        transformRequest: angular.identity
 		    })  
