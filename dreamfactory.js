@@ -1,4 +1,5 @@
 'use strict';
+   // INSTALL:  bower install manviny/manviny.dreamfactory --save
   /**
    * @memberof manviny.dreamfactory
    * @ngdoc module
