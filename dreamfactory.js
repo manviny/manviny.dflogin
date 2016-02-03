@@ -276,7 +276,7 @@
 		*/
 		this.createFile = function (path, name) {
 			var deferred = $q.defer();
-			$http.post('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+			$http.post('/api/v2/S3'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -292,7 +292,7 @@
 		*/
 		this.deleteFile = function (path, name) {
 			var deferred = $q.defer();
-			$http.delete('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+			$http.delete('/api/v2/S3'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -307,7 +307,7 @@
 		*/
 		this.createFolder = function (path, name) {
 			var deferred = $q.defer();
-			$http.post('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+			$http.post('/api/v2/S3'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
