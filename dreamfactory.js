@@ -313,6 +313,29 @@
 			return deferred.promise;
 		};
 
+
+		/**
+		* converts path to Breadcrumbs
+		* @memberof DFS3ΩΩΩ
+	 	* @function pathToBreadcrumb	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.pathToBreadcrumbs = function (name) {
+
+		};
+
+		/**
+		* converts Breadcrumbs to path 
+		* @memberof DFS3ΩΩΩ
+	 	* @function breadcrumbToPath	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.breadcrumbsToPath = function (name) {
+
+		};
+
 		/**
 		* Uploads a file to S3
 		* @memberof DFS3
