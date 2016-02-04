@@ -316,21 +316,16 @@
 
 		/**
 		* converts path to Breadcrumbs
-		* @memberof DFS3ΩΩΩ
+		* @memberof DFS3
 	 	* @function pathToBreadcrumb	 		
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.pathToBreadcrumbs = function (bucketContent) {
+		this.pathToBreadcrumbs = function (path) {
 			
-				// breadcrumbs
-				try { 
-					var breadcrumbs = bucketContent.folders[0].path.split('/');
-					breadcrumbs.pop(); breadcrumbs.pop();
-				} catch(err) { 
-					return bucketContent.folders;
-				}
-				return breadcrumbs
+			var breadcrumbs = path.split('/');
+			breadcrumbs.pop(); 
+			return breadcrumbs;
 		};
 
 		/**
