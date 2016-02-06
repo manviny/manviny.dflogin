@@ -291,8 +291,12 @@
 		* @returns {Hash} filterd attributes
 		*/
 		this.deleteFile = function (path, name) {
+			var url = '/api/v2/S3/';
+			if(path=='/' || path=='') { url = url + name }
+			else { url = url + path.replace(/^\/|\/$/g, '')  + '/' + name}
+
 			var deferred = $q.defer();
-			$http.delete('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+			$http.delete(url).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -347,6 +351,12 @@
 		* @returns {Hash} filterd attributes
 		*/
 		this.uploadFile = function (path, file) {
+			console.log('path', path);
+			var url = '/api/v2/S3/';
+			if(path=='/' || path=='') { url = url + file.name }
+			else { url = url + path.replace(/^\/|\/$/g, '')  + '/' + file.name}
+			console.log('http', url);
+
 			var deferred = $q.defer();
 
 		    var fd = new FormData();
