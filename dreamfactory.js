@@ -291,12 +291,9 @@
 		* @returns {Hash} filterd attributes
 		*/
 		this.deleteFile = function (path, name) {
-			var url = '/api/v2/S3/';
-			if(path=='/' || path=='') { url = url + name }
-			else { url = url + path.replace(/^\/|\/$/g, '')  + '/' + name}
-
+			
 			var deferred = $q.defer();
-			$http.delete(url).then(function (result) {
+			$http.delete( this.getPath(path, file) ).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -311,7 +308,7 @@
 		*/
 		this.createFolder = function (path, name) {
 			var deferred = $q.defer();
-			$http.post('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/' + name +'/' ).then(function (result) {
+			$http.post( this.getPath(path, file) + '/' ).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -351,18 +348,13 @@
 		* @returns {Hash} filterd attributes
 		*/
 		this.uploadFile = function (path, file) {
-			console.log('path', path);
-			var url = '/api/v2/S3/';
-			if(path=='/' || path=='') { url = url + file.name }
-			else { url = url + path.replace(/^\/|\/$/g, '')  + '/' + file.name}
-			console.log('http', url);
 
 			var deferred = $q.defer();
 
 		    var fd = new FormData();
 		    fd.append("files", file);
 
-		    $http.post( "/api/v2/S3/"+ path.replace(/^\/|\/$/g, '')  + '/' + file.name, fd, {	
+		    $http.post( this.getPath(path, file.name) , fd, {	
 		        headers: {'Content-Type': undefined },
 		        transformRequest: angular.identity
 		    })  
@@ -377,6 +369,15 @@
 
 		};
 
+		// calula el path 
+		this.getPath = function (path, name) {
+			console.debug(path, name);
+			var url = '/api/v2/S3/';
+			if(path=='/' || path=='') { url = url + name }
+			else { url = url + path.replace(/^\/|\/$/g, '')  + '/' + name}
+			console.debug(url);
+			return url;
+		};
 
 
 	}])
