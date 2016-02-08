@@ -99,13 +99,25 @@
 	            
 	            element.bind('change', function(){
 	                scope.$apply(function(){
-	                    modelSetter(scope, element[0].files[0]);
+	                    modelSetter(scope, element[0].files);
 	                });
 	            });
 	        }
 	    };
 	}])
-    
+
+	.directive('fileChange', [
+	    function() {
+	        return {
+	            link: function(scope, element, attrs) {
+	                element[0].onchange = function() {
+	                    scope[attrs['fileChange']](element[0])
+	                }
+	            }
+	            
+	        }
+	    }
+	])    
     
 	/**
      * @memberof manviny	
@@ -233,8 +245,10 @@
 			var deferred = $q.defer();
 			$http.get('/api/v2/S3/'+ path.replace(/^\/|\/$/g, '') +'/?include_folders=true&include_files=true').then(function (result) {
 				angular.forEach(result.data.resource, function(value) {
-					if(value.type=='folder'){ folders.push(value) }
-					else { files.push(value) }
+					if (value.name.charAt(0)!='.'){							// fichero oculto
+						if(value.type=='folder'){ folders.push(value) }
+						else { files.push(value) }
+					}
 				});
 				deferred.resolve({files:files, folders:folders});
 			}, deferred.reject);
