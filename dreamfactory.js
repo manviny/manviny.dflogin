@@ -156,6 +156,17 @@
 			}, deferred.reject);
 			return deferred.promise;
 		};
+
+   //register new user
+	//    this.register = function () {
+	//     var deferred = $q.defer();
+	//     $http.post('/api/v2/user/register?login=true', options).then(function (result) {
+	//      handleResult(result)
+	//      deferred.resolve(result.data);
+	//     }, deferred.reject);
+	//     return deferred.promise;
+	//    }
+
 		/**
 		* logout user
 		* @memberof DFUser
@@ -163,15 +174,21 @@
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
 		*/
-		this.logout = function (creds) {
+		this.logout = function () {
 			var deferred = $q.defer();
       		$http({
       			method: 'DELETE',
       			url: '/api/v2/user/session'
       		}).success(function (result) {
+				$http.defaults.headers.common['X-DreamFactory-Session-Token'] = null;
+				$rootScope.user = null     			
       			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
       			deferred.resolve(result);
-      		});
+      		})
+      		.error(function(data){
+		    	
+		    	// deferred.reject(data);
+			});	
 			return deferred.promise;
 		};
 
