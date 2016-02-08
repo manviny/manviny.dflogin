@@ -174,14 +174,12 @@
 		* @param {creds} email,password
 		* @returns {Hash} filterd attributes
 		*/
-		this.logout = function () {
+		this.logout = function (creds) {
 			var deferred = $q.defer();
       		$http({
       			method: 'DELETE',
       			url: '/api/v2/user/session'
       		}).success(function (result) {
-				$http.defaults.headers.common['X-DreamFactory-Session-Token'] = null;
-				$rootScope.user = null     			
       			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
       			deferred.resolve(result);
       		})
