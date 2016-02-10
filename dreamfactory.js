@@ -310,9 +310,9 @@
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.createFile = function (path, name) {
+		this.createFile = function (path, file) {
 			var deferred = $q.defer();
-			$http.post(userPath + path.replace(/^\/|\/$/g, '') +'/' + name).then(function (result) {
+			$http.post( this.getPath(path, file) ).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
@@ -342,7 +342,7 @@
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.createFolder = function (path, name) {
+		this.createFolder = function (path, file) {
 			var deferred = $q.defer();
 			$http.post( this.getPath(path, file) + '/' ).then(function (result) {
 				 deferred.resolve(result.data);
