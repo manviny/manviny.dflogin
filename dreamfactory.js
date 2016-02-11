@@ -180,12 +180,14 @@
       			method: 'DELETE',
       			url: '/api/v2/user/session'
       		}).success(function (result) {
+      			$rootScope.user = '';
       			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];
       			deferred.resolve(result);
       		})
       		.error(function(data){
-		    	
-		    	// deferred.reject(data);
+      			$rootScope.user = '';
+      			delete $http.defaults.headers.common['X-DreamFactory-Session-Token'];      			
+		    	deferred.reject(data);
 			});	
 			return deferred.promise;
 		};
