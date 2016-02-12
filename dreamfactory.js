@@ -306,15 +306,15 @@
 		};
 
 		/**
-		* creates EMPTY file in S3
+		* creates FILE in S3, its content is data
 		* @memberof DFS3
 	 	* @function createFile	 		
 		* @param {path,name} path in S3, name of the file
 		* @returns {Hash} filterd attributes
 		*/
-		this.createFile = function (path, file) {
+		this.createFile = function (path, file, data) {
 			var deferred = $q.defer();
-			$http.post( this.getPath(path, file) ).then(function (result) {
+			$http.post( this.getPath(path, file), data ).then(function (result) {
 				 deferred.resolve(result.data);
 			}, deferred.reject);
 			return deferred.promise;
