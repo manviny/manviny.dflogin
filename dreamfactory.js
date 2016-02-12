@@ -320,6 +320,54 @@
 			return deferred.promise;
 		};
 
+		/**
+		* get  FILE from S3
+		* @memberof DFS3
+	 	* @function getFile	 		
+		* @param {path,name} path in S3, name of the file
+		* @returns {Hash} filterd attributes
+		*/
+		this.getFile = function (path, file, download) {
+			// if(download) download = '?download=true';
+			download = download ? '?download=true' : '';
+			console.debug("DOWNLOAD", this.getPath(path, file)+ download );
+			var deferred = $q.defer();
+
+
+			$http.post( this.getPath(path, file)+ download )
+			.then(function (result) {
+				console.log(result)
+			    var anchor = angular.element('<a/>');
+			    anchor.attr({
+			        href: 'data:attachment/json;charset=utf-8,' + encodeURI(result.data),
+			        // href: 'data:image/png,' + encodeURI(result.data),
+			        target: '_blank',
+			        download: file
+			    })[0].click();				
+				deferred.resolve(result);
+			}, deferred.reject);
+
+
+			// $http({method: 'GET', url: this.getPath(path, file)+ download})
+			// .success(function(data, status, headers, config) {
+			//   	console.log(data, status, headers, config)
+			//     var anchor = angular.element('<a/>');
+			//     anchor.attr({
+			//         href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+			//         target: '_blank',
+			//         download: file
+			//     })[0].click();
+			// 	deferred.resolve(data);
+			// })
+			// .error(function(data, status, headers, config) {
+			//   	deferred.reject
+			//     // if there's an error you should see it here
+			//  });
+
+
+			return deferred.promise;
+		};
+
 
 		/**
 		* deletes  file in S3
