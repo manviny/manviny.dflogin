@@ -334,35 +334,22 @@
 			var deferred = $q.defer();
 
 
-			$http.post( this.getPath(path, file)+ download )
+			$http.get( this.getPath(path, file)+ download )
 			.then(function (result) {
-				console.log(result)
-			    var anchor = angular.element('<a/>');
-			    anchor.attr({
-			        href: 'data:attachment/json;charset=utf-8,' + encodeURI(result.data),
-			        // href: 'data:image/png,' + encodeURI(result.data),
-			        target: '_blank',
-			        download: file
-			    })[0].click();				
-				deferred.resolve(result);
+				if(download!='') {			// Descargar ichero
+				    var anchor = angular.element('<a/>');
+				    anchor.attr(
+				    {
+				        href: 'data:text/html;charset=utf-8,' + (result),
+				        // href: 'data:image/png,' + encodeURI(result.data),
+				        target: '_blank',
+				        download: file
+				    }
+				    )[0].click();						
+				}
+				// Devolver metadata
+				deferred.resolve(result.data);
 			}, deferred.reject);
-
-
-			// $http({method: 'GET', url: this.getPath(path, file)+ download})
-			// .success(function(data, status, headers, config) {
-			//   	console.log(data, status, headers, config)
-			//     var anchor = angular.element('<a/>');
-			//     anchor.attr({
-			//         href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
-			//         target: '_blank',
-			//         download: file
-			//     })[0].click();
-			// 	deferred.resolve(data);
-			// })
-			// .error(function(data, status, headers, config) {
-			//   	deferred.reject
-			//     // if there's an error you should see it here
-			//  });
 
 
 			return deferred.promise;
