@@ -119,6 +119,81 @@
 	    }
 	])    
     
+
+
+	/**
+     * @memberof manviny	
+	 * @ngdoc service
+	 * @name DFS3
+	 * @description
+	 *   Services to use S3
+	 */     
+	.service('AWS',  function ($http, $q, $rootScope) {
+
+		// var userPath = '/api/v2/'+ BUCKET + '/';
+
+		/**
+		* Get bucket files and folders from the given path (1 level, not recursive)
+		* @memberof DFS3
+	 	* @function getBucketContent	 		
+		* @param {path}  path from where to get content
+		* @returns {array} array of Objects => {files:files, folders:folders} -> (content_length, content_type, last_modified, name, path, type)
+	    * @example
+	    *   Usage:
+	    *   		DFS3.getBucketContent( || '' || '/' || 'path'|| '/path'|| 'path/' || '/path/')
+		*			.then(function (result) { 		
+		*/
+		this.login = function (creds) {
+			var deferred = $q.defer();
+	  		$http({
+	  			method: 'POST',
+	  			url: 'http://indinet.es/aws/login/',
+	  			// data: {'user': creds.email, 'pass': creds.password}
+	  			data: {'user': 'manolfiction', 'pass': creds.password}
+	  		})
+	  		.success(function (result) {
+	  			console.log("LOGEADO",result)
+				deferred.resolve(result);
+	  		})
+	  		.error(function(data){
+	  			console.log("NO LOGEADO",data)
+	  			deferred.reject;
+			});	
+			return deferred.promise;
+		}
+
+
+		/**
+		* Get bucket files and folders from the given path (1 level, not recursive)
+		* @memberof DFS3
+	 	* @function getBucketContent	 		
+		* @param {path}  path from where to get content
+		* @returns {array} array of Objects => {files:files, folders:folders} -> (content_length, content_type, last_modified, name, path, type)
+	    * @example
+	    *   Usage:
+	    *   		DFS3.getBucketContent( || '' || '/' || 'path'|| '/path'|| 'path/' || '/path/')
+		*			.then(function (result) { 		
+		*/
+		this.ListObjects = function (bucket, path) { 
+			var deferred = $q.defer();
+	  		$http({
+	  			method: 'POST',
+	  			url: 'http://indinet.es/aws/listobjects/',
+	  			data: {'bucket':bucket, 'prefix': path}
+	  		})
+	  		.success(function (result) { deferred.resolve(result); })
+	  		.error(function(data){ deferred.reject; });	
+			return deferred.promise;
+		}
+
+
+
+
+
+
+	}) //AWS
+
+
 	/**
      * @memberof manviny	
 	 * @ngdoc service
