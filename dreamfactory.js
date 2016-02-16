@@ -174,12 +174,12 @@
 	    *   		DFS3.getBucketContent( || '' || '/' || 'path'|| '/path'|| 'path/' || '/path/')
 		*			.then(function (result) { 		
 		*/
-		this.ListObjects = function (bucket, path) { 
+		this.ListObjects = function ( path) { 
 			var deferred = $q.defer();
 	  		$http({
 	  			method: 'POST',
 	  			url: 'http://indinet.es/aws/listobjects/',
-	  			data: {'bucket':bucket, 'prefix': path}
+	  			data: {'prefix': path}
 	  		})
 	  		.success(function (result) { deferred.resolve(result); })
 	  		.error(function(data){ deferred.reject; });	
